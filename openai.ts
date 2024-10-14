@@ -4,10 +4,12 @@ import OpenAI from "openai";
 const {htmlToText} = require('html-to-text');
 
 export class OpenaiApi {
-    private openai: OpenAI;
+    private readonly openai: OpenAI;
+    private readonly chromePath: string;
 
-    constructor() {
+    constructor(chromePath: string) {
         this.openai = new OpenAI();
+        this.chromePath = chromePath;
     }
 
     async referenceFromUrl(url: string) {
@@ -38,7 +40,7 @@ export class OpenaiApi {
     }
 
     private async webPageToText(url: string): Promise<string> {
-        const browser = await puppeteer.launch({headless: true});
+        const browser = await puppeteer.launch({headless: true, executablePath: this.chromePath});
         const page = await browser.newPage();
         await page.goto(url, {waitUntil: 'networkidle0'});
 

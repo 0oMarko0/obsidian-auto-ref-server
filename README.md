@@ -22,8 +22,3 @@ curl -X POST http://localhost:3000/api/reference \
   -H "Content-Type: application/json" \
   -d '{"url": "url of a web page"}'
 ```
-
-To register with systemd. Make sure to replace the API key in the service file before registering it.
-```bash
-./install.sh
-```

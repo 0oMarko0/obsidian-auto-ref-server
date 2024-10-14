@@ -1,6 +1,8 @@
 import {OpenaiApi} from "./openai.ts";
 
-const openAiApi = new OpenaiApi()
+const chromePath = process.env.CHROME_EXECUTABLE_PATH || '/sbin/google-chrome-stable';
+const openAiApi = new OpenaiApi(chromePath)
+
 const server = Bun.serve({
     async fetch(req) {
         const path = new URL(req.url).pathname;
@@ -13,7 +15,6 @@ const server = Bun.serve({
 
         if (req.method === "POST" && path === "/api/reference") {
             const data = await req.json();
-            console.log(data)
             if(!('url' in data)) {
                 return Response.json({type: "MISSING_URL", msg: "You must provide a valid URL."});
             }
