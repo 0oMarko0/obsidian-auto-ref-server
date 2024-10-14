@@ -2,13 +2,16 @@
 Stupid and simple server that return information about a web article using openai.
 
 To install dependencies:
-
 ```bash
 bun install
 ```
 
-To run:
+Set the OPENAI_API_KEY env
+```bash
+export OPENAI_API_KEY=you key
+```
 
+To run:
 ```bash
 bun run main.ts
 ```
@@ -18,5 +21,9 @@ To test
 curl -X POST http://localhost:3000/api/reference \
   -H "Content-Type: application/json" \
   -d '{"url": "url of a web page"}'
+```
 
+To register with systemd. Make sure to replace the API key in the service file before registering it.
+```bash
+./install.sh
 ```

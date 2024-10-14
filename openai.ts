@@ -7,7 +7,7 @@ export class OpenaiApi {
     private openai: OpenAI;
 
     constructor() {
-        this.openai = new OpenAI({apiKey: Bun.env.OPENAI_KEY});
+        this.openai = new OpenAI();
     }
 
     async referenceFromUrl(url: string) {
